@@ -1,0 +1,15 @@
+
+
+namespace server.Models {
+
+    public class User {
+
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string EncryptedPassword { get; set; }
+
+        public float Balance { get; set; }
+    }
+}
