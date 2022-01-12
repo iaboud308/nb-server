@@ -22,7 +22,7 @@ namespace server.Services {
             user.LastName = userDto.LastName;
             user.Email = userDto.Email;
             user.EncryptedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-            user.Balance = 0;
+            user.Balance = 5000;
 
             return user;
         }
@@ -46,6 +46,23 @@ namespace server.Services {
             Console.WriteLine(userIsValid);
             return userIsValid;
 
+        }
+
+        public User GetUser(LoginUser loginUser) {
+            
+            User user = context.Users
+                            .Where(u => u.Email.Equals(loginUser.Email))
+                            .FirstOrDefault();
+
+            return user;
+
+        }
+
+        public IEnumerable<User> GetUsers() {
+
+            IEnumerable<User> users = context.Users.ToList<User>();
+
+            return users;
         }
     }
 }

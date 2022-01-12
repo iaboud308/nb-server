@@ -1,21 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
+using server.Services;
+using server.Models;
+
 
 namespace server.Controllers {
 
     [ApiController]
     [Route("[Controller]")]
-    public class UsersControllers : ControllerBase {
+    public class UsersController : ControllerBase {
+
+        UserServices userServices;
+        public UsersController() {
+            userServices = new UserServices();
+        }
 
 
+        public IActionResult GetAllUsers() {
+            IEnumerable<User> AllUsers = userServices.GetUsers();
 
-        // public User GetUser() {
-
-        //     HttpRequest request = Request;
-        //     var headers = request.Headers;
-        //     Console.WriteLine(headers);
-
-        // }
-
+            return Ok(AllUsers);
+        }
 
     }
 

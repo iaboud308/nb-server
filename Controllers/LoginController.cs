@@ -17,12 +17,11 @@ namespace server.Controllers {
         [HttpPost]
         public IActionResult Login(LoginUser loginUser) {
 
-            string FakeToken = $"ThisIsAFakeToken{loginUser.Email}";
-            
             bool userIsValid = userServices.Login(loginUser);
 
             if (userIsValid) {
-                return Ok(new { token = FakeToken });
+                User user = userServices.GetUser(loginUser);
+                return Ok(user);
             } else {
                 return Ok(userIsValid);
             }

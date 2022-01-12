@@ -27,13 +27,6 @@ namespace server.Controllers {
             return Ok();
         }
 
-        // [HttpPost]
-        // public IActionResult Login(LoginUser loginUser) {
-            
-        //     bool userIsValid = userServices.Login(loginUser);
-
-        //     return Ok(userIsValid);
-        // }
 
     }
 }
