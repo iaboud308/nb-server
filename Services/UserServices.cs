@@ -5,8 +5,11 @@ namespace server.Services {
     public class UserServices {
 
         BankContext context;
+        FinanceService financeService;
+
         public UserServices() {
             context = new BankContext();
+            financeService = new FinanceService();
         }
 
         public string EncryptPassword(string Password) {
@@ -28,11 +31,13 @@ namespace server.Services {
         }
 
         public void RegisterUser(UserDto userDto) {
+
             
             User user = MapUserToDto(userDto);
             context.Add(user);
             context.SaveChanges();
             
+            financeService.SetInitialBalance(user.Id);
         }
 
         public bool Login(LoginUser loginUser) {
@@ -63,6 +68,14 @@ namespace server.Services {
             IEnumerable<User> users = context.Users.ToList<User>();
 
             return users;
+        }
+
+        public User GetUserById(int Id) {
+            User user = context.Users
+                            .Where(u => u.Id == Id)
+                            .FirstOrDefault();
+            
+            return user;
         }
     }
 }

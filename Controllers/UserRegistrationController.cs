@@ -24,7 +24,7 @@ namespace server.Controllers {
 
             Console.WriteLine('1');
             userServices.RegisterUser(userDto);
-            return Ok();
+            return Ok(userDto);
         }
 
 

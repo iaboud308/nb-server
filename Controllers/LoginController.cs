@@ -9,8 +9,10 @@ namespace server.Controllers {
     public class LoginController : ControllerBase {
 
         UserServices userServices;
+        FinanceService financeService;
         public LoginController() {
             userServices = new UserServices();
+            financeService = new FinanceService();
         }
 
 
@@ -21,7 +23,12 @@ namespace server.Controllers {
 
             if (userIsValid) {
                 User user = userServices.GetUser(loginUser);
-                return Ok(user);
+                IEnumerable<TransactionDto> Transactions = financeService.GetTransactionsByUserId(user.Id);
+                UserAndTransactions FullUser = new UserAndTransactions();
+                FullUser.User = user;
+                FullUser.Transactions = Transactions;
+
+                return Ok(FullUser);
             } else {
                 return Ok(userIsValid);
             }

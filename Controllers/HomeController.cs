@@ -8,6 +8,7 @@ namespace server.Controllers {
     [Route("[controller]")]
     public class HomeController : ControllerBase {
 
+        [HttpGet]
         public IActionResult Home() {
             return Ok("Welcome...");
         }

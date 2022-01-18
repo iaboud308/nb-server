@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Services;
-
+using server.Models;
 
 namespace server.Controllers {
 
@@ -9,17 +9,34 @@ namespace server.Controllers {
     public class TransferController : ControllerBase {
 
         FinanceService financeService;
+        UserServices userServices;
 
         public TransferController() {
             financeService = new FinanceService();
+            userServices = new UserServices();
         }
 
         [HttpPost]
         public IActionResult Transfer(Transfer transfer) {
             
-            financeService.Transfer(transfer);
+            TransferState transferState = financeService.Transfer(transfer);
 
-            return Ok();
+            if(transferState == TransferState.InsufficientFunds) {
+                return BadRequest("Insufficient Funds");
+            }
+
+            if(transferState == TransferState.InvalidUser) {
+                return BadRequest("Invalid User");
+            }
+
+            User user = userServices.GetUserById(transfer.From);
+            IEnumerable<TransactionDto> transactions = financeService.GetTransactionsByUserId(user.Id);
+
+            UserAndTransactions FullUser = new UserAndTransactions();
+            FullUser.User = user;
+            FullUser.Transactions = transactions;
+
+            return Ok(FullUser);
         }
 
 
