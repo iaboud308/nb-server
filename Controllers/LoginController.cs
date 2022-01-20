@@ -12,7 +12,7 @@ namespace server.Controllers {
         FinanceService financeService;
         public LoginController() {
             userServices = new UserServices();
-            financeService = new FinanceService();
+            financeService = new FinanceService(new BankContext(), new UserServices());
         }
 
 

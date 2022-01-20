@@ -9,19 +9,20 @@ namespace server.Controllers {
     [Route("[Controller]")]
     public class DepositController : ControllerBase {
 
-        FinanceService financeService;
+        // FinanceService financeService;
 
-        public DepositController() {
-            financeService = new FinanceService();
-        }
+        // public DepositController() {
+        //     financeService = new FinanceService();
+        // }
 
+        [HttpPost]
         public IActionResult Deposit(Deposit deposit) {
 
-            bool depositProcess = financeService.Deposit(deposit);
+            // bool depositProcess = financeService.Deposit(deposit);
 
-            if(depositProcess == false) {
-                return BadRequest();
-            }
+            // if(depositProcess == false) {
+            //     return BadRequest();
+            // }
 
             return Ok();
         }

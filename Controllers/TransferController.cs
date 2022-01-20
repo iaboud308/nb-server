@@ -12,8 +12,8 @@ namespace server.Controllers {
         UserServices userServices;
 
         public TransferController() {
-            financeService = new FinanceService();
             userServices = new UserServices();
+            financeService = new FinanceService(new BankContext(), userServices);
         }
 
         [HttpPost]

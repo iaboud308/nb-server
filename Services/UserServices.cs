@@ -9,7 +9,7 @@ namespace server.Services {
 
         public UserServices() {
             context = new BankContext();
-            financeService = new FinanceService();
+            financeService = new FinanceService(context, new UserServices());
         }
 
         public string EncryptPassword(string Password) {

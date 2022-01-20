@@ -11,7 +11,7 @@ namespace server.Controllers {
         FinanceService financeService;
 
         public TransactionController() {
-            financeService = new FinanceService();
+            financeService = new FinanceService(new BankContext(), new UserServices());
         }
 
 
