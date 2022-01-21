@@ -3,7 +3,7 @@ using MySql.EntityFrameworkCore.Extensions;
 
 namespace server.Models {
 
-    class BankContext : DbContext {
+    public class BankContext : DbContext {
 
         public DbSet<User> Users { get; set; }
         public DbSet<Transaction> Transactions {  get; set; }

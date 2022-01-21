@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ibrahim/Documents/Software/nama-bank/server/server.csproj": {}
+    "/Users/ibrahim/Documents/Software/nama-bank/server/server.csproj": {}
   },
   "projects": {
-    "/home/ibrahim/Documents/Software/nama-bank/server/server.csproj": {
+    "/Users/ibrahim/Documents/Software/nama-bank/server/server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ibrahim/Documents/Software/nama-bank/server/server.csproj",
+        "projectUniqueName": "/Users/ibrahim/Documents/Software/nama-bank/server/server.csproj",
         "projectName": "server",
-        "projectPath": "/home/ibrahim/Documents/Software/nama-bank/server/server.csproj",
-        "packagesPath": "/home/ibrahim/.nuget/packages/",
-        "outputPath": "/home/ibrahim/Documents/Software/nama-bank/server/obj/",
+        "projectPath": "/Users/ibrahim/Documents/Software/nama-bank/server/server.csproj",
+        "packagesPath": "/Users/ibrahim/.nuget/packages/",
+        "outputPath": "/Users/ibrahim/Documents/Software/nama-bank/server/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ibrahim/.nuget/NuGet/NuGet.Config"
+          "/Users/ibrahim/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

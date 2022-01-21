@@ -10,6 +10,7 @@ namespace server.Controllers {
 
         UserServices userServices;
         FinanceService financeService;
+        
         public LoginController() {
             userServices = new UserServices();
             financeService = new FinanceService();

@@ -42,16 +42,27 @@ namespace server.Services {
 
         public bool Login(LoginUser loginUser) {
             
-            User user = context.Users
-                            .Where(u => u.Email.Equals(loginUser.Email))
-                            .FirstOrDefault();
+            try {
+                User user = context.Users
+                                .Where(u => u.Email.Equals(loginUser.Email))
+                                .FirstOrDefault();
 
-            bool userIsValid = BCrypt.Net.BCrypt.Verify(loginUser.Password, user.EncryptedPassword);
+                Console.WriteLine(user.FirstName);
 
-            Console.WriteLine(userIsValid);
-            return userIsValid;
+                bool userIsValid = BCrypt.Net.BCrypt.Verify(loginUser.Password, user.EncryptedPassword);
+
+                Console.WriteLine(userIsValid);
+                return userIsValid;
+
+            } catch (Exception e) {
+
+                Console.WriteLine(e);
+                return false;
+
+            }
 
         }
+
 
         public User GetUser(LoginUser loginUser) {
             
