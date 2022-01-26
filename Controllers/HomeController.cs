@@ -5,7 +5,7 @@ namespace server.Controllers {
 
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("/")]
     public class HomeController : ControllerBase {
 
         [HttpGet]

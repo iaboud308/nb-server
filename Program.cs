@@ -1,14 +1,23 @@
 using Microsoft.AspNetCore.HttpLogging;
 using server.Models;
 using server.Services;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 
-// builder.Services.AddSingleton<BankContext>();
-// builder.Services.AddSingleton<UserServices>();
+    options.KnownProxies.Add(IPAddress.Parse("88.208.199.31"));
+});
+
+
 builder.Services.AddCors(options => options.AddDefaultPolicy(
     builder => builder.AllowAnyOrigin()
                 .AllowAnyHeader()
@@ -28,15 +37,17 @@ builder.Services.AddHttpLogging(logging => {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+// }
+
+app.UseForwardedHeaders();
 
 app.UseHttpLogging();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseCors();
 
