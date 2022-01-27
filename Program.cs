@@ -6,6 +6,11 @@ using System.Net;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options => options.AddDefaultPolicy(
+    b => b.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+));
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -16,11 +21,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 
-builder.Services.AddCors(options => options.AddDefaultPolicy(
-    b => b.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
