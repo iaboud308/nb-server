@@ -12,13 +12,13 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(
                 .AllowAnyMethod()
 ));
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-
-    options.KnownProxies.Add(IPAddress.Parse("88.208.199.31"));
-});
+// builder.Services.Configure<ForwardedHeadersOptions>(options =>
+// {
+//     options.ForwardedHeaders =
+//         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+//
+//     options.KnownProxies.Add(IPAddress.Parse("88.208.199.31"));
+// });
 
 
 builder.Services.AddControllers();
@@ -43,12 +43,11 @@ var app = builder.Build();
 
 app.UseCors();
 
-app.UseForwardedHeaders();
+// app.UseForwardedHeaders();
 
 app.UseHttpLogging();
 
-// app.UseHttpsRedirection();
-
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
