@@ -41,13 +41,14 @@ var app = builder.Build();
 //    app.UseSwaggerUI();
 // }
 
+app.UseCors();
+
 app.UseForwardedHeaders();
 
 app.UseHttpLogging();
 
 // app.UseHttpsRedirection();
 
-app.UseCors();
 
 app.UseAuthorization();
 
