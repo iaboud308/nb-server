@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.HttpLogging;
-using server.Models;
-using server.Services;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
 
@@ -19,7 +17,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(
-    builder => builder.AllowAnyOrigin()
+    b => b.AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
 ));
