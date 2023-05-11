@@ -8,23 +8,24 @@ namespace server.Controllers {
     [Route("[Controller]")]
     public class LoginController : ControllerBase {
 
-        UserServices userServices;
-        FinanceService financeService;
-        
-        public LoginController() {
-            userServices = new UserServices();
-            financeService = new FinanceService();
+        private readonly UserServices _userServices;
+        private readonly FinanceService _financeService;
+
+
+        public LoginController(FinanceService financeService, UserServices userServices) {
+            _userServices = userServices;
+            _financeService = financeService;
         }
 
 
         [HttpPost]
         public IActionResult Login(LoginUser loginUser) {
 
-            bool userIsValid = userServices.Login(loginUser);
+            bool userIsValid = _userServices.Login(loginUser);
 
             if (userIsValid) {
-                User user = userServices.GetUser(loginUser);
-                IEnumerable<TransactionDto> Transactions = financeService.GetTransactionsByUserId(user.Id);
+                User user = _userServices.GetUser(loginUser);
+                IEnumerable<TransactionDto> Transactions = _financeService.GetTransactionsByUserId(user.Id);
                 UserAndTransactions FullUser = new UserAndTransactions();
                 FullUser.User = user;
                 FullUser.Transactions = Transactions;

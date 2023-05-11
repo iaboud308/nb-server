@@ -7,20 +7,21 @@ namespace server.Controllers {
     [ApiController]
     [Route("[Controller]")]
     public class TransferController : ControllerBase {
+       
+        private readonly UserServices _userServices;
+        private readonly FinanceService _financeService;
 
-        FinanceService financeService;
-        UserServices userServices;
 
-        public TransferController() {
-            userServices = new UserServices();
-            financeService = new FinanceService();
+        public TransferController(UserServices userServices, FinanceService financeService) {
+            _userServices = userServices;
+            _financeService = financeService;
         }
         
 
         [HttpPost]
         public IActionResult Transfer(Transfer transfer) {
             
-            TransferState transferState = financeService.Transfer(transfer);
+            TransferState transferState = _financeService.Transfer(transfer);
 
             if(transferState == TransferState.InsufficientFunds) {
                 return BadRequest("Insufficient Funds");
@@ -30,8 +31,8 @@ namespace server.Controllers {
                 return BadRequest("Invalid User");
             }
 
-            User user = userServices.GetUserById(transfer.From);
-            IEnumerable<TransactionDto> transactions = financeService.GetTransactionsByUserId(user.Id);
+            User user = _userServices.GetUserById(transfer.From);
+            IEnumerable<TransactionDto> transactions = _financeService.GetTransactionsByUserId(user.Id);
 
             UserAndTransactions FullUser = new UserAndTransactions();
             FullUser.User = user;

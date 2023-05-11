@@ -1,6 +1,11 @@
 
 
 Config.cs
+.idea
+.vs
 .vscode
 bin
+Migrations
+obj
+server.sln
 

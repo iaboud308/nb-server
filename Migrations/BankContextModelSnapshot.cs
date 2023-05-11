@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using server.Models;
 
+#nullable disable
+
 namespace server.Migrations
 {
     [DbContext(typeof(BankContext))]
@@ -14,8 +16,8 @@ namespace server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.8");
+                .HasAnnotation("ProductVersion", "6.0.15")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("server.Models.Transaction", b =>
                 {
@@ -23,26 +25,26 @@ namespace server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<float>("Amount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("FromId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FromNewBalance")
-                        .HasColumnType("int");
+                    b.Property<float>("FromNewBalance")
+                        .HasColumnType("float");
 
                     b.Property<int>("ToId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ToNewBalance")
-                        .HasColumnType("int");
+                    b.Property<float>("ToNewBalance")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -59,16 +61,16 @@ namespace server.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("EncryptedPassword")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

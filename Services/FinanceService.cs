@@ -6,11 +6,14 @@ namespace server.Services {
 
     public class FinanceService {
 
-        BankContext _context;
-        // UserServices _userServices;
-        public FinanceService() {
-            _context = new BankContext();
-            // _userServices = new UserServices();
+        private readonly BankContext _context;
+        private readonly UserServices _userServices;
+
+
+
+        public FinanceService(BankContext context, UserServices userServices) {
+            _context = context;
+            _userServices = userServices;
         }
 
 

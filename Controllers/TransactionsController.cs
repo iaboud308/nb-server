@@ -7,11 +7,13 @@ namespace server.Controllers {
     [ApiController]
     [Route("[Controller]")]
     public class TransactionController : ControllerBase {
-        
-        FinanceService financeService;
 
-        public TransactionController() {
-            financeService = new FinanceService();
+        private readonly FinanceService _financeService;
+
+
+
+        public TransactionController(FinanceService financeService) {
+            _financeService = financeService;
         }
 
 
@@ -19,7 +21,7 @@ namespace server.Controllers {
         [HttpGet]
         public IActionResult GetAllTransactions(int Id) {
 
-            IEnumerable<TransactionDto> Transactions = financeService.GetTransactionsByUserId(Id);
+            IEnumerable<TransactionDto> Transactions = _financeService.GetTransactionsByUserId(Id);
 
             return Ok(Transactions);
         }

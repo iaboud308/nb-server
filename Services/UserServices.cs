@@ -4,18 +4,19 @@ using server.Models;
 namespace server.Services {
     public class UserServices {
 
-        BankContext context;
-        FinanceService financeService;
+        private readonly BankContext _context;
 
-        public UserServices() {
-            context = new BankContext();
-            financeService = new FinanceService();
+
+        public UserServices(BankContext context) {
+            _context = context;
         }
+
+
 
         public string EncryptPassword(string Password) {
-
             return Password;
         }
+
 
 
         public User MapUserToDto(UserDto userDto) {
@@ -34,16 +35,14 @@ namespace server.Services {
 
             
             User user = MapUserToDto(userDto);
-            context.Add(user);
-            context.SaveChanges();
-            
-            financeService.SetInitialBalance(user.Id);
+            _context.Add(user);
+            _context.SaveChanges();
         }
 
         public bool Login(LoginUser loginUser) {
             
             try {
-                User user = context.Users
+                User user = _context.Users
                                 .Where(u => u.Email.Equals(loginUser.Email))
                                 .FirstOrDefault();
 
@@ -66,7 +65,7 @@ namespace server.Services {
 
         public User GetUser(LoginUser loginUser) {
             
-            User user = context.Users
+            User user = _context.Users
                             .Where(u => u.Email.Equals(loginUser.Email))
                             .FirstOrDefault();
 
@@ -76,13 +75,13 @@ namespace server.Services {
 
         public IEnumerable<User> GetUsers() {
 
-            IEnumerable<User> users = context.Users.ToList<User>();
+            IEnumerable<User> users = _context.Users.ToList<User>();
 
             return users;
         }
 
         public User GetUserById(int Id) {
-            User user = context.Users
+            User user = _context.Users
                             .Where(u => u.Id == Id)
                             .FirstOrDefault();
             

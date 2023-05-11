@@ -9,11 +9,13 @@ namespace server.Controllers {
     [Route("[controller]")]
     public class UserRegistrationController : ControllerBase {
 
+        private readonly UserServices _userServices;
+        private readonly FinanceService _financeServices;
 
-        UserServices userServices;
 
-        public UserRegistrationController() {
-            userServices = new UserServices();
+        public UserRegistrationController(UserServices userServices, FinanceService financeService) {
+            _userServices = userServices;
+            _financeServices = financeService;
         }
          
 
@@ -22,8 +24,7 @@ namespace server.Controllers {
         [HttpPost]
         public IActionResult RegisterUser(UserDto userDto) {
 
-            Console.WriteLine('1');
-            userServices.RegisterUser(userDto);
+            _userServices.RegisterUser(userDto);
             return Ok(userDto);
         }
 

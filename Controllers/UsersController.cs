@@ -8,16 +8,18 @@ namespace server.Controllers {
     [ApiController]
     [Route("[Controller]")]
     public class UsersController : ControllerBase {
+        private readonly UserServices _userServices;
 
-        UserServices userServices;
-        public UsersController() {
-            userServices = new UserServices();
+
+        public UsersController(UserServices userServices) {
+            _userServices = userServices;
         }
+
+
 
         [HttpGet]
         public IActionResult GetAllUsers() {
-            IEnumerable<User> AllUsers = userServices.GetUsers();
-
+            IEnumerable<User> AllUsers = _userServices.GetUsers();
             return Ok(AllUsers);
         }
 
